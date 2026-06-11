@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: traefik
+  namespace: kube-public
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: traefik
+
+  ports:
+    - name: web
+      port: 30021
+      targetPort: 80
+      nodePort: 30021
+
+    - name: dashboard
+      port: 30042
+      targetPort: 8080
+      nodePort: 30042
+
