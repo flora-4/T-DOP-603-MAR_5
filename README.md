@@ -16,27 +16,25 @@ Ce projet déploie une application distribuée sur Kubernetes composée de plusi
 
 ## Architecture
 
-```text
-Utilisateur
-      |
-      v
-   Traefik
-      |
-  +---+---+
-  |       |
-  v       v
- Poll   Result
-  |
-  v
- Redis
-  |
-  v
- Worker
-  |
-  v
- PostgreSQL
+```mermaid
+flowchart TD
+    U[Utilisateur] --> T[Traefik]
 
-cAdvisor --> Monitoring des nœuds et conteneurs
+    T --> P[Poll]
+    T --> R[Result]
+
+    P --> REDIS[Redis]
+    REDIS --> W[Worker]
+    W --> PG[(PostgreSQL)]
+
+    C[cAdvisor]
+
+    C -. Monitoring .-> T
+    C -. Monitoring .-> P
+    C -. Monitoring .-> R
+    C -. Monitoring .-> REDIS
+    C -. Monitoring .-> W
+    C -. Monitoring .-> PG
 ```
 
 ---
