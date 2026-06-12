@@ -27,6 +27,8 @@ flowchart TD
     REDIS --> W[Worker]
     W --> PG[(PostgreSQL)]
 
+    PG -->R    
+
     C[cAdvisor]
 
     C -. Monitoring .-> T
